@@ -82,6 +82,11 @@ def _com_github_brpc_brpc():
         name = "com_github_brpc_brpc",
         branch = "a1",
         remote = "https://github.com/982945902/brpc.git",
+        patch_args = ["-p1"],
+        patches = [
+            "@yacl//bazel:patches/brpc.patch",
+            "@yacl//bazel:patches/brpc_m1.patch",
+        ],
     )
 
 def _com_github_gflags_gflags():
