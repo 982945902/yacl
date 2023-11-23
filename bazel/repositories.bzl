@@ -63,20 +63,25 @@ def yacl_deps():
     )
 
 def _com_github_brpc_brpc():
-    maybe(
-        http_archive,
+    #maybe(
+    #    http_archive,
+    #    name = "com_github_brpc_brpc",
+    #    sha256 = "48668cbc943edd1b72551e99c58516249d15767b46ea13a843eb8df1d3d1bc42",
+    #    strip_prefix = "brpc-1.7.0",
+    #    type = "tar.gz",
+    #    patch_args = ["-p1"],
+    #    patches = [
+    #        "@yacl//bazel:patches/brpc.patch",
+    #        "@yacl//bazel:patches/brpc_m1.patch",
+    #    ],
+    #    urls = [
+    #        "https://github.com/apache/brpc/archive/refs/tags/1.7.0.tar.gz",
+    #    ],
+    #)
+    git_repository(
         name = "com_github_brpc_brpc",
-        sha256 = "48668cbc943edd1b72551e99c58516249d15767b46ea13a843eb8df1d3d1bc42",
-        strip_prefix = "brpc-1.7.0",
-        type = "tar.gz",
-        patch_args = ["-p1"],
-        patches = [
-            "@yacl//bazel:patches/brpc.patch",
-            "@yacl//bazel:patches/brpc_m1.patch",
-        ],
-        urls = [
-            "https://github.com/apache/brpc/archive/refs/tags/1.7.0.tar.gz",
-        ],
+        branch = "a1",
+        remote = "https://github.com/982945902/brpc.git",
     )
 
 def _com_github_gflags_gflags():
