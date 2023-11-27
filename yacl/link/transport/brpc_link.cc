@@ -143,6 +143,9 @@ void BrpcLink::SendRequest(const Request& request, uint32_t timeout) const {
   if (timeout != 0) {
     cntl.set_timeout_ms(timeout);
   }
+  if (options_.controller_interceptor) {
+    options_.controller_interceptor(cntl, self_rank_, peer_rank_);
+  }
   ic_pb::ReceiverService::Stub stub(delegate_channel_.get());
   stub.Push(&cntl, static_cast<const ic_pb::PushRequest*>(&request), &response,
             nullptr);
