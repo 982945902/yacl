@@ -64,7 +64,7 @@ class BrpcLink final : public InterconnectionLink {
 
   static InterconnectionLink::Options GetDefaultOptions() {
     return InterconnectionLink::Options{10 * 1000, 512 * 1024, "baidu_std",
-                                        "single"};
+                                        "single", nullptr};
   }
   void SendRequest(const ::google::protobuf::Message& request,
                    uint32_t timeout_override_ms) const override;

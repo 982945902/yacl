@@ -157,7 +157,10 @@ bool InterconnectionLink::IsMonoRequest(
 auto InterconnectionLink::MakeOptions(
     Options& default_opt, uint32_t http_timeout_ms,
     uint32_t http_max_payload_bytes, const std::string& brpc_channel_protocol,
-    const std::string& brpc_channel_connection_type) -> Options {
+    const std::string& brpc_channel_connection_type,
+    const std::function<void(brpc::Controller& cntl, size_t self_rank,
+                             size_t peer_rank)>& controller_interceptor)
+    -> Options {
   auto opts = default_opt;
   if (http_timeout_ms != 0) {
     opts.http_timeout_ms = http_timeout_ms;
@@ -185,6 +188,10 @@ auto InterconnectionLink::MakeOptions(
 
   if (!brpc_channel_connection_type.empty()) {
     opts.channel_connection_type = brpc_channel_connection_type;
+  }
+
+  if (controller_interceptor) {
+    opts.controller_interceptor = controller_interceptor;
   }
 
   return opts;

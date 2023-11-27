@@ -18,6 +18,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <functional>
 #include <limits>
 #include <map>
 #include <string>
@@ -139,6 +140,10 @@ struct ContextDesc {
   std::string link_type = kDefaultLinkType;
 
   RetryOptions retry_opts;
+
+  std::function<void(brpc::Controller& cntl, size_t self_rank,
+                     size_t peer_rank)>
+      controller_interceptor;
 
   bool operator==(const ContextDesc& other) const {
     return (id == other.id) && (parties == other.parties);

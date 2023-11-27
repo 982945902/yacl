@@ -80,7 +80,8 @@ std::shared_ptr<Context> FactoryBrpcBlackBox::CreateContext(
   auto options = transport::BrpcBlackBoxLink::GetDefaultOptions();
   options = transport::BrpcBlackBoxLink::MakeOptions(
       options, desc.http_timeout_ms, desc.http_max_payload_size,
-      desc.brpc_channel_protocol, desc.brpc_channel_connection_type);
+      desc.brpc_channel_protocol, desc.brpc_channel_connection_type,
+      desc.controller_interceptor);
 
   if (options.channel_protocol != "http" && options.channel_protocol != "h2") {
     YACL_THROW_LOGIC_ERROR(

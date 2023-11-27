@@ -78,7 +78,8 @@ class ReceiverLoopBlackBox final : public IReceiverLoop {
 class BrpcBlackBoxLink final : public InterconnectionLink {
  public:
   static InterconnectionLink::Options GetDefaultOptions() {
-    return InterconnectionLink::Options{10 * 1000, 512 * 1024, "http", ""};
+    return InterconnectionLink::Options{10 * 1000, 512 * 1024, "http", "",
+                                        nullptr};
   }
 
   using InterconnectionLink::InterconnectionLink;

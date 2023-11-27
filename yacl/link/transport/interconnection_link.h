@@ -43,12 +43,17 @@ class InterconnectionLink : public TransportLink {
     uint32_t http_max_payload_bytes = 512 * 1024;  // 512k bytes
     std::string channel_protocol;
     std::string channel_connection_type;
+    std::function<void(brpc::Controller& cntl, size_t self_rank,
+                       size_t peer_rank)>
+        controller_interceptor;
   };
 
-  static Options MakeOptions(Options& default_opt, uint32_t http_timeout_ms,
-                             uint32_t http_max_payload_size,
-                             const std::string& brpc_channel_protocol,
-                             const std::string& brpc_channel_connection_type);
+  static Options MakeOptions(
+      Options& default_opt, uint32_t http_timeout_ms,
+      uint32_t http_max_payload_size, const std::string& brpc_channel_protocol,
+      const std::string& brpc_channel_connection_type,
+      const std::function<void(brpc::Controller& cntl, size_t self_rank,
+                               size_t peer_rank)>& controller_interceptor);
 
   InterconnectionLink(size_t self_rank, size_t peer_rank, Options options)
       : TransportLink(self_rank, peer_rank), options_(std::move(options)) {}

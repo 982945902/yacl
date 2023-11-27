@@ -48,7 +48,8 @@ std::shared_ptr<Context> FactoryBrpc::CreateContext(const ContextDesc& desc,
   auto opts = transport::BrpcLink::GetDefaultOptions();
   opts = transport::BrpcLink::MakeOptions(
       opts, desc.http_timeout_ms, desc.http_max_payload_size,
-      desc.brpc_channel_protocol, desc.brpc_channel_connection_type);
+      desc.brpc_channel_protocol, desc.brpc_channel_connection_type,
+      desc.controller_interceptor);
 
   auto msg_loop = std::make_unique<transport::ReceiverLoopBrpc>();
   std::vector<std::shared_ptr<transport::IChannel>> channels(world_size);
